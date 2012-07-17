@@ -26,8 +26,8 @@
 
 // for UNO: 3, 5, 6, 9, 10, and 11. (the pins with the ~ next to them) 
 // Provide 8-bit PWM output with the analogWrite() function
-int motor_speed_pwm_pin = 5;
-int motor_steer_pwm_pin = 6;
+int motor_speed_pwm_pin = 3;
+int motor_steer_pwm_pin = 9;
 
 // Enter a MAC address, IP address and Portnumber for your Server below.
 // The IP address will be dependent on your local network:
@@ -49,6 +49,18 @@ void setup()
 {
   // start the serial for debugging
   Serial.begin(9600);
+  
+  // fix pwm frequency
+  // TCCR2B = (TCCR2B & 0xF8) | 5;
+  // 31372.5      Hz    ->        1
+  // 3921.57      Hz    ->        2
+  // 980.392      Hz    ->        3
+  // 490.196      Hz    ->        4    (default)
+  // 245.098      Hz    ->        5
+  // 122.549      Hz    ->        6
+  // 30.6373      Hz    ->        7
+
+  
   
   // start the Ethernet connection and the server:
   Ethernet.begin(mac, serverIP);
@@ -149,7 +161,7 @@ void setData(String dataName, String dataVal, EthernetClient client) {
     int dataValInt=atoi(buf);
     
     // send it back
-    client.println(dataValInt); 
+    // client.println(dataValInt); 
   }
   
   if (dataName=="motor_speed"){

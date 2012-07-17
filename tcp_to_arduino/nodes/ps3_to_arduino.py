@@ -10,7 +10,12 @@ import time
 # rosrun tcp_to_arduino send_data_to_arduino_service.py
 
 def ps3_to_pwm(val):
-    return int((val+1.)*255/2.)
+    max_val = 254
+    min_val = 127
+    
+    return int(((val+1.)/2.) * (max_val-min_val) + min_val)
+
+    #return int((val+1.)*255/2.)
 
 class Arduino_Data_Client:
     def __init__ (self, rate):
@@ -37,7 +42,7 @@ class Arduino_Data_Client:
             self.joy_changed = True
         
     def send_data(self, timer):
-        if self.joy_changed: # used to only send data if it is new
+        if self.Joy is not None: #self.joy_changed: # used to only send data if it is new
             time_start = time.time()
             motor_speed_pwm = ps3_to_pwm(self.Joy.axes[1])
             data = self.send_data_to_arduino("set", "motor_speed", motor_speed_pwm)
@@ -46,7 +51,7 @@ class Arduino_Data_Client:
             
             motor_steer_pwm = ps3_to_pwm(self.Joy.axes[2])
             data = self.send_data_to_arduino("set", "motor_steer", motor_steer_pwm)
-            #print "set data: ", data      
+            print "set data: ", data      
                   
             self.joy_changed = False
             
@@ -54,6 +59,6 @@ class Arduino_Data_Client:
 
 if __name__ == '__main__':
 
-    rate = 20
+    rate = 5
     arduino_data_transmission = Arduino_Data_Client(rate)
     

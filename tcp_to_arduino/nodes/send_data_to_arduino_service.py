@@ -29,7 +29,7 @@ class Arduino_Data_Transmission:
         #print 'sending msg: ', msg_to_arduino 
         self.sock.send(msg_to_arduino)
         
-        if request.action == 'get':
+        if 1: #request.action == 'get':
             data = ''
             collect_data = True
             while collect_data:
