@@ -45,12 +45,12 @@ class Arduino_Data_Client:
         if self.Joy is not None: #self.joy_changed: # used to only send data if it is new
             time_start = time.time()
             motor_speed_pwm = ps3_to_pwm(self.Joy.axes[1])
-            data = self.send_data_to_arduino("set", "motor_speed", motor_speed_pwm)
+            data = self.send_data_to_arduino("s", "mspd", motor_speed_pwm)
             #print "set data: ", data            
             print 'communication time roundtrip: ', time.time() - time_start
             
             motor_steer_pwm = ps3_to_pwm(self.Joy.axes[2])
-            data = self.send_data_to_arduino("set", "motor_steer", motor_steer_pwm)
+            data = self.send_data_to_arduino("s", "mstr", motor_steer_pwm)
             print "set data: ", data      
                   
             self.joy_changed = False

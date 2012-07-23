@@ -94,8 +94,8 @@ void loop()
           readDataVal = true;
         } else if (c=='\n') { // if "end of line" run the appropriate function
           Serial.println("Message from Client:"+clientMsg);//print it to the serial, for debugging
-          if (action=="set") setData(dataName, dataVal, client);
-          else if (action=="get") getData(dataName, client);
+          if (action=="s") setData(dataName, dataVal, client);
+          else if (action=="g") getData(dataName, client);
           clientMsg = "";
           action = "";
           dataName = "";
@@ -129,20 +129,40 @@ void loop()
 
 void getData(String dataName, EthernetClient client) {
   
-  if (dataName=="sensor1") {
+  if (dataName=="ax") {
+    int sensorReading = analogRead(0);
+    //String serial_msg = "Sensor2 reading: ";
+    //serial_msg+=sensorReading;
+    //Serial.println(serial_msg);
+    client.println(sensorReading);
+  }
+  else if (dataName=="ay") {
     int sensorReading = analogRead(1);
-    String serial_msg = "Sensor1 reading: ";
-    serial_msg+=sensorReading;
-    Serial.println(serial_msg);
+    //String serial_msg = "Sensor2 reading: ";
+    //serial_msg+=sensorReading;
+    //Serial.println(serial_msg);
     client.println(sensorReading);
   }
-  if (dataName=="sensor2") {
+  else if (dataName=="az") {
     int sensorReading = analogRead(2);
-    String serial_msg = "Sensor2 reading: ";
-    serial_msg+=sensorReading;
-    Serial.println(serial_msg);
+    //String serial_msg = "Sensor2 reading: ";
+    //serial_msg+=sensorReading;
+    //Serial.println(serial_msg);
     client.println(sensorReading);
   }
+  
+  else if (dataName=="s") {
+    int sensorReading = analogRead(3);
+    //String serial_msg = "Sensor2 reading: ";
+    //serial_msg+=sensorReading;
+    //Serial.println(serial_msg);
+    client.println(sensorReading);
+  }
+  
+  else {
+    client.println(-1000);
+  }
+  
   
 }
   
@@ -164,7 +184,7 @@ void setData(String dataName, String dataVal, EthernetClient client) {
     // client.println(dataValInt); 
   }
   
-  if (dataName=="motor_speed"){
+  if (dataName=="mspd"){
     // convert to an integer
     char buf[dataVal.length()+1];
     dataVal.toCharArray(buf,dataVal.length()+1);
@@ -174,10 +194,10 @@ void setData(String dataName, String dataVal, EthernetClient client) {
     analogWrite(motor_speed_pwm_pin,dataValInt);
     
     // send it back
-    client.println(dataValInt); 
+    // client.println(dataValInt); 
   }
   
-  if (dataName=="motor_steer"){
+  if (dataName=="mstr"){
     // convert to an integer
     char buf[dataVal.length()+1];
     dataVal.toCharArray(buf,dataVal.length()+1);
@@ -187,7 +207,7 @@ void setData(String dataName, String dataVal, EthernetClient client) {
     analogWrite(motor_steer_pwm_pin,dataValInt);
     
     // send it back
-    client.println(dataValInt); 
+    // client.println(dataValInt); 
   }
   
   
