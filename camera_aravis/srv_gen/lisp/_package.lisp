@@ -1,0 +1,10 @@
+(cl:defpackage camera_aravis-srv
+  (:use )
+  (:export
+   "RETURNIMAGEFLOAT"
+   "<RETURNIMAGEFLOAT-REQUEST>"
+   "RETURNIMAGEFLOAT-REQUEST"
+   "<RETURNIMAGEFLOAT-RESPONSE>"
+   "RETURNIMAGEFLOAT-RESPONSE"
+  ))
+

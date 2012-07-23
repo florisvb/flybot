@@ -1,0 +1,3 @@
+bool request
+---
+float32[] data
