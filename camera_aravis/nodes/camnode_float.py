@@ -32,7 +32,7 @@ class Image_Converter:
   def image_callback(self,data):
     try:
         cv_image = self.bridge.imgmsg_to_cv(data, "mono8")
-        np_image = numpy.asarray(cv_image, dtype=numpy.float32)[300:302,:]
+        np_image = numpy.asarray(cv_image, dtype=numpy.float32)[0:5,:]
         msg = FloatArray()
         msg.shape = [np_image.shape[0], np_image.shape[1]]
         msg.data = [i for i in np_image.reshape(np_image.shape[0]*np_image.shape[1], 1)]
