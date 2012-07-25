@@ -157,7 +157,7 @@ int main(int argc, char** argv) {
 
     {
         int arv_option_width = -1;
-        int arv_option_height = -1;
+        int arv_option_height = 10;
 		int arv_option_horizontal_binning = -1;
 		int arv_option_vertical_binning = -1;
 		double arv_option_exposure_time_us = -1;
@@ -171,14 +171,15 @@ int main(int argc, char** argv) {
         arv_camera_set_exposure_time_auto(camera, ARV_AUTO_OFF);
         arv_camera_set_gain_auto(camera, ARV_AUTO_OFF);
 
-		arv_camera_set_region (camera, 0, 0, arv_option_width, arv_option_height);
+		arv_camera_set_region (camera, 0, 240, arv_option_width, arv_option_height);
 		arv_camera_set_binning (camera, arv_option_horizontal_binning, arv_option_vertical_binning);
 
         /*
 		g_config.exposure = arv_camera_get_exposure_time(camera);
 		g_config.gain = arv_camera_get_gain(camera);
         */
-        arv_camera_set_exposure_time(camera, g_config.exposure);
+        //arv_camera_set_exposure_time(camera, g_config.exposure);
+        arv_camera_set_exposure_time(camera, 8000);
         arv_camera_set_gain(camera, g_config.gain);
 
 		arv_camera_get_region (camera, &x, &y, &width, &height);
