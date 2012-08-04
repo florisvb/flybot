@@ -9,7 +9,13 @@ import time
 # rosrun joy joy_node
 # rosrun tcp_to_arduino send_data_to_arduino_service.py
 
-def ps3_to_pwm(val):
+def ps3_to_pwm(val, command=None):
+
+    if command == 'speed':
+        val /= 1.
+    elif command == 'steer':
+        val /= 3.
+
     max_val = 254
     min_val = 127
     
@@ -44,14 +50,14 @@ class Arduino_Data_Client:
     def send_data(self, timer):
         if self.Joy is not None: #self.joy_changed: # used to only send data if it is new
             time_start = time.time()
-            motor_speed_pwm = ps3_to_pwm(self.Joy.axes[1])
+            motor_speed_pwm = ps3_to_pwm(-1*self.Joy.axes[1], command='speed')
             data = self.send_data_to_arduino("s", "mspd", motor_speed_pwm)
             #print "set data: ", data            
             print 'communication time roundtrip: ', time.time() - time_start
             
-            motor_steer_pwm = ps3_to_pwm(self.Joy.axes[2])
+            motor_steer_pwm = ps3_to_pwm(-1*self.Joy.axes[2], command='steer')
             data = self.send_data_to_arduino("s", "mstr", motor_steer_pwm)
-            print "set data: ", data      
+            #print "set data: ", data      
                   
             self.joy_changed = False
             
@@ -59,6 +65,6 @@ class Arduino_Data_Client:
 
 if __name__ == '__main__':
 
-    rate = 5
+    rate = 10
     arduino_data_transmission = Arduino_Data_Client(rate)
     

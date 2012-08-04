@@ -171,7 +171,7 @@ int main(int argc, char** argv) {
         arv_camera_set_exposure_time_auto(camera, ARV_AUTO_OFF);
         arv_camera_set_gain_auto(camera, ARV_AUTO_OFF);
 
-		arv_camera_set_region (camera, 0, 240, arv_option_width, arv_option_height);
+		arv_camera_set_region (camera, 0, 220, arv_option_width, arv_option_height);
 		arv_camera_set_binning (camera, arv_option_horizontal_binning, arv_option_vertical_binning);
 
         /*

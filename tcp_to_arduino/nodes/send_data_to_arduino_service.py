@@ -36,6 +36,13 @@ class Arduino_Data_Transmission:
                 data += self.sock.recv(BUFFER_SIZE)
                 if data[-1] == '\n':
                     collect_data = False
+        elif request.action == 's':
+            data = ''
+            collect_data = True
+            while collect_data:
+                data += self.sock.recv(BUFFER_SIZE)
+                if data[-1] == '\n':
+                    collect_data = False
         else:
             data = 1
         

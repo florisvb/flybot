@@ -194,7 +194,7 @@ void setData(String dataName, String dataVal, EthernetClient client) {
     analogWrite(motor_speed_pwm_pin,dataValInt);
     
     // send it back
-    // client.println(dataValInt); 
+    client.println(dataValInt); 
   }
   
   if (dataName=="mstr"){
@@ -207,7 +207,7 @@ void setData(String dataName, String dataVal, EthernetClient client) {
     analogWrite(motor_steer_pwm_pin,dataValInt);
     
     // send it back
-    // client.println(dataValInt); 
+    client.println(dataValInt); 
   }
   
   
