@@ -82,7 +82,7 @@ void loop()
   LeftAmps=analogRead(LmotorC);                               // read left motor current draw
   RightAmps=analogRead(RmotorC);                              // read right motor current draw
 
-  //Serial.print(LeftAmps);
+  //Serial.println(Volts);
   //Serial.print("    ");
   //Serial.println(RightAmps);
 
