@@ -1,0 +1,6 @@
+my_camera:
+    roi:
+        x: 0
+        y: 210
+        width: 640
+        height: 50

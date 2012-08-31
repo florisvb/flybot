@@ -1,0 +1,24 @@
+# some basic instructions - all rosrun commands should be in their own tab in a terminal
+
+
+# start up ros
+roscore
+
+# load roi parameters
+rosparam load 'bin/roi.yaml'
+
+# start a cameranode - this is for the GigE cameras using Steve's camera_aravis package
+# camera_aravis: https://github.com/ssafarik/camera_aravis
+ROS_NAMESPACE='my_camera' rosrun camera_aravis camnode
+
+# start dynamic reconfigure
+rosrun dynamic_reconfigure reconfigure_gui
+
+# camera live view
+rosrun image_view image_view image:=my_camera/image_raw
+
+# start lucas_kanade estimator and service:
+rosrun optic_flow lucas_kanade.py
+
+# start lucas_kanade live plotting:
+rosrun optic_flow lucas_kanade_ransac_live_plot.py
