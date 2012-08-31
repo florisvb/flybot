@@ -1,9 +1,0 @@
-bin
-build
-cfg/CameraAravisConfig.cfgc
-cfg/cpp
-docs
-src/camera_aravis
-*~
-srv_gen
-msg_gen
